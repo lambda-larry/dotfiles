@@ -1,0 +1,13 @@
+[init]
+	defaultBranch = master
+[commit]
+	verbose = true
+[alias]
+	gr = log \
+		--all \
+		--decorate \
+		--graph \
+		--abbrev-commit \
+		--format=format:'%C(yellow)%h%C(reset)%C(auto)%d%C(reset) %C(normal)%s%C(reset) %C(blue)[author: %an]%C(reset) %C(dim green)[%cs]%C(reset)'
+[core]
+	pager = less -F
