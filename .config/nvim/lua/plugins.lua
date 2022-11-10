@@ -126,4 +126,10 @@ return require('packer').startup(function(use)
 
 
   use 'mxw/vim-prolog'
+
+  use {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
+  }
 end)
