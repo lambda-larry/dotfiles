@@ -132,4 +132,6 @@ return require('packer').startup(function(use)
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
   }
+
+  use 'lambda-larry/vim-vinegar.nvim'
 end)

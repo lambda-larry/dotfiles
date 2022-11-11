@@ -15,9 +15,9 @@ local options = {
 util.vim.opt(options)
 
 vim.g.mapleader = ' '
+vim.g.netrw_dirhistmax = 0
 
 require('plugins')
-require('vinegar')
 
 vim.cmd.colorscheme('dracula')
 
