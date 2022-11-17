@@ -134,4 +134,6 @@ return require('packer').startup(function(use)
   }
 
   use 'lambda-larry/vim-vinegar.nvim'
+
+  use 'souffle-lang/souffle.vim'
 end)
