@@ -1,5 +1,11 @@
 local util = require('util')
 
+local filetypes = {
+  souffle = 'souffle-lang/souffle.vim',
+  jinja   = 'Glench/Vim-Jinja2-Syntax',
+  haxe    = 'yaymukund/vim-haxe',
+  ron     = 'ron-rs/ron.vim',
+}
 
 return require('packer').startup(function(use)
 
@@ -123,5 +129,8 @@ return require('packer').startup(function(use)
 
   use 'lambda-larry/vim-vinegar.nvim'
 
-  use 'souffle-lang/souffle.vim'
+  for _, plugin in pairs(filetypes) do
+    use(plugin)
+  end
+
 end)
