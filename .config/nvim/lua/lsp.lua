@@ -52,7 +52,6 @@ table.insert(runtime_path, 'lua/?/init.lua')
 local lsp_server = {
   gopls = {},
   sumneko_lua = {
-    -- cmd = { vim.fn.expand('~/git/lua-language-server/bin/lua-language-server') },
     settings = {
       Lua = {
         runtime = {
@@ -83,6 +82,8 @@ local lsp_server = {
     },
   },
   clangd = {},
+  tsserver = {},
+  hls = {},
 }
 
 require("mason").setup()
