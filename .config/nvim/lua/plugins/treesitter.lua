@@ -7,6 +7,14 @@ return function()
     return vim.g['dracula#palette'][color][1]
   end
 
+  vim.api.nvim_create_autocmd('InsertLeave', {
+    pattern  = '*',
+    callback = function()
+      vim.cmd('TSDisable rainbow')
+      vim.cmd('TSEnable rainbow')
+    end,
+  })
+
   treesitter.setup({
     highlight = {
       enable = true,
