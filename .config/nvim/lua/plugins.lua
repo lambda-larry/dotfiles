@@ -113,18 +113,6 @@ return require('packer').startup(function(use)
 
   use 'tpope/vim-repeat'
 
-  use {'nvim-orgmode/orgmode', config = function()
-      require('orgmode').setup {
-        org_agenda_files = {
-          (vim.env.XDG_DOCUMENTS_DIR or vim.env.HOME) .. '/org/**/*',
-        },
-        org_default_notes_file = (vim.env.XDG_DOCUMENTS_DIR or vim.env.HOME) .. '/org/notes.org',
-      }
-      require('orgmode').setup_ts_grammar()
-    end
-  }
-
-
   use 'mxw/vim-prolog'
 
   use {

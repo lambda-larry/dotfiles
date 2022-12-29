@@ -8,8 +8,7 @@ return function()
   }
 
   vim.g.startify_bookmarks = {
-    { n = '~/.config/nvim/'           },
-    { t = '~/Documents/org/notes.org' },
+    { n = '~/.config/nvim/' },
   }
 
   vim.g.startify_commands = {
