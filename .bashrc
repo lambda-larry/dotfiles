@@ -10,6 +10,7 @@ function load() {
 	[ -f "$1" ] && . "$1"
 }
 
+load "$HOME/.bashrc.d/gentoo-prompt.sh"
 load "$HOME/.bashrc.d/env.sh"
 load "$HOME/.bashrc.d/alias.sh"
 load "$HOME/.bashrc.d/git.sh"
