@@ -8,7 +8,8 @@ return function()
   }
 
   vim.g.startify_bookmarks = {
-    { n = '~/.config/nvim/' },
+    { n = '~/.config/nvim/'            },
+    { x = '~/.config/xmonad/xmonad.hs' },
   }
 
   vim.g.startify_commands = {
