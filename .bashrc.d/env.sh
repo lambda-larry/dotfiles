@@ -12,7 +12,7 @@ export GPG_TTY=$(tty)
 
 # XDG configuration
 export XDG_CONFIG_HOME="$HOME/.config"
-if [ -f "$XDG_CONFIG_HOME/user-dirs.dirs" ]; then
+if [ "$UID" != 0 ] && [ -f "$XDG_CONFIG_HOME/user-dirs.dirs" ]; then
 	. "$XDG_CONFIG_HOME/user-dirs.dirs"
 	for var in $(grep -v '#' "$XDG_CONFIG_HOME/user-dirs.dirs" | cut -d = -f 1); do
 		export $var
