@@ -13,4 +13,5 @@ git config core.worktree "$HOME"
 git remote add origin https://github.com/lambda-larry/dotfiles.git
 git fetch
 git reset --hard origin/master
+git branch --set-upstream-to=origin/master master
 ```
