@@ -17,6 +17,10 @@ util.vim.opt(options)
 vim.g.mapleader = ' '
 vim.g.netrw_dirhistmax = 0
 
+if vim.loop.getuid() == 0 then
+  return
+end
+
 require('plugins')
 
 vim.cmd.colorscheme('dracula')
