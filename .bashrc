@@ -14,5 +14,6 @@ load "$HOME/.bashrc.d/gentoo-prompt.sh"
 load "$HOME/.bashrc.d/env.sh"
 load "$HOME/.bashrc.d/alias.sh"
 load "$HOME/.bashrc.d/git.sh"
+load "$HOME/.bashrc.d/zfsbootmenu.sh"
 
 unset load
