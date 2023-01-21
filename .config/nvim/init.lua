@@ -12,6 +12,12 @@ local options = {
   splitright     = true,
 }
 
+if vim.loop.getuid() == 0 then
+  -- Empty means that no swap file will be used.
+  -- We don't want swap files for root user as it might edit sensitive files.
+  options.directory = ''
+end
+
 util.vim.opt(options)
 
 vim.g.mapleader = ' '
