@@ -27,6 +27,10 @@ if vim.loop.getuid() == 0 then
   return
 end
 
+if vim.g.vscode then
+  return
+end
+
 require('plugins')
 
 vim.cmd.colorscheme('dracula')
