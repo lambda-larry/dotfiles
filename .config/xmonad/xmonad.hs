@@ -100,7 +100,7 @@ windowsRules = composeAll
   -- torbrowser has to float to have the same viewport as other torbrowser users.
   , className =? "Tor Browser"              --> doFloat
   , className =? "kruler"                   --> doFloat
-  , role      =? "ksmserver-logout-greeter" --> doFloat
+  , className =? "ksmserver-logout-greeter" --> doFloat
   , role      =? "About"                    --> doFloat
   , role      =? "Dialog"                   --> doFloat
   , className =? "plasma"                   --> doFloat
