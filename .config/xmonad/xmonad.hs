@@ -35,7 +35,7 @@ main =  xmonad $
   , layoutHook         = lessBorders Screen $ gaps $ desktopLayoutModifiers layouts
   }
   where
-    layouts = tiled ||| (reflectHoriz . twitch_chat $ reflectHoriz tiled) ||| noBorders Full
+    layouts = tiled ||| (reflectHoriz . im_chat $ reflectHoriz tiled) ||| noBorders Full
       where
         -- default tiling algorithm partitions the screen into two panes
         tiled   = Tall nmaster delta ratio
@@ -49,8 +49,7 @@ main =  xmonad $
         -- Percent of screen to increment by when resizing panes
         delta   = 3/100
 
-        -- TODO: make my own withIM from scratch, that is more flexible
-        twitch_chat = withIM (1%5) (Title "lambda_larry - Chat - Twitch — Mozilla Firefox Private Browsing")
+        im_chat = withIM (225%1000) (Role "im-chat")
 
 
 keymaps XConfig{modMask = modm} = M.fromList
