@@ -1,0 +1,24 @@
+*
+
+# Bash
+!.bashrc
+!.bashrc.d
+!.bashrc.d/**
+
+!.config
+.config/*
+
+# Tmux
+!.config/tmux
+!.config/tmux/**
+
+# Neovim
+!.config/nvim
+!.config/nvim/**
+
+# Git
+!.config/git
+!.config/git/**
+
+# XDG configuration
+!.config/user-dirs.dirs
