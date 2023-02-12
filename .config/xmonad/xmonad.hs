@@ -26,8 +26,6 @@ main =  xmonad $
   kde4Config
   { borderWidth        = 1
   , modMask            = mod4Mask
-  -- , workspaces         = map show [0..9]
-  , workspaces         = ["!", "@", "#", "$", "%", "^^", "&", "*", "("]
   , normalBorderColor  = "#282A36"
   , focusedBorderColor = "#BD93F9"
   , manageHook         = manageHook kde4Config <+> windowsRules
