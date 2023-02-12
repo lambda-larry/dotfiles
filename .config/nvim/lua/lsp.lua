@@ -51,7 +51,7 @@ table.insert(runtime_path, 'lua/?/init.lua')
 
 local lsp_server = {
   gopls = {},
-  sumneko_lua = {
+  lua_ls = {
     settings = {
       Lua = {
         runtime = {
