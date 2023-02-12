@@ -84,6 +84,7 @@ local lsp_server = {
   clangd = {},
   tsserver = {},
   hls = {},
+  gdscript = {},
 }
 
 require("mason").setup()
