@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.local/share/go/bin:$PATH"
-
 export EDITOR=nvim
 export VISUAL=nvim
 
@@ -20,16 +17,21 @@ if [ "$UID" != 0 ] && [ -f "$XDG_CONFIG_HOME/user-dirs.dirs" ]; then
 	unset var
 fi
 
-
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 
-
 export GOPATH="$XDG_DATA_HOME"/go
+export CARGO_HOME="$XDG_DATA_HOME"/cargo
+
+export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 
 # Disable bash history
 HISTFILE=/dev/null
 
 DOTFILES_DIR="$HOME/dotfiles"
+
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$GOPATH/bin:$PATH"
+export PATH="$CARGO_HOME/bin:$PATH"
