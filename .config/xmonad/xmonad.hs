@@ -84,8 +84,8 @@ keymaps XConfig{modMask = modm} = M.fromList
     , ((modm,  xK_period), nextScreen)
     , ((modm .|. shiftMask,    xK_comma),  shiftPrevScreen >> prevScreen)
     , ((modm .|. shiftMask,    xK_period), shiftNextScreen >> nextScreen)
-    , ((modm .|. controlMask,  xK_comma),  swapPrevScreen)
-    , ((modm .|. controlMask,  xK_period), swapNextScreen)
+    , ((modm .|. controlMask,  xK_comma),  swapPrevScreen  >> prevScreen)
+    , ((modm .|. controlMask,  xK_period), swapNextScreen  >> nextScreen)
 
     , ((modm,  xK_bracketleft),  moveTo Prev nonEmptyHiddenWS)
     , ((modm,  xK_bracketright), moveTo Next nonEmptyHiddenWS)
