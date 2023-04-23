@@ -5,12 +5,20 @@ return {
   },
   {
     'folke/which-key.nvim',
-    config = function()
+    opts = {
+      window = {
+        border = 'single',
+      },
+    },
+    config = function(_, opts)
       vim.o.timeout    = true
       vim.o.timeoutlen = 300
-      require("which-key").setup({
-        window = {
-          border = 'single',
+      local which_key = require('which-key')
+      which_key.setup(opts)
+      which_key.register({
+        ['<leader>l']  = {
+          name  = '+lsp',
+          g = { name = '+goto', },
         },
       })
     end,
