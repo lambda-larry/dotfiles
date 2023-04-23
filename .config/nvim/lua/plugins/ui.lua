@@ -31,7 +31,7 @@ return {
       vim.g.startify_fortune_use_unicode = 1
       vim.g.startify_change_to_vcs_root  = 1
 
-      vim.g.startify_custom_header_quotes = vim.fn["startify#fortune#predefined_quotes"]()
+      vim.g.startify_custom_header_quotes = vim.fn['startify#fortune#predefined_quotes']()
 
     end,
   },
