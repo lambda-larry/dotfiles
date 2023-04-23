@@ -48,4 +48,26 @@ return {
     'nvim-tree/nvim-web-devicons',
     lazy = true
   },
+  {
+    'ten3roberts/qf.nvim',
+    opts = {
+      c = {
+        max_height = 10,
+        min_height = 0,
+      },
+      l = {
+        max_height = 10,
+        min_height = 0,
+      },
+      pretty = false,
+    },
+    config = function(_, opts)
+      local qf = require('qf')
+      qf.setup(opts)
+
+      vim.keymap.set('n', '<leader>q', function() qf.toggle('c', true) end, { noremap = true, desc = 'Toggle quickfix', })
+      vim.keymap.set('n', ']q', '<cmd>cnext<cr>',     { noremap = true, desc = 'Next quickfix item', })
+      vim.keymap.set('n', '[q', '<cmd>cprevious<cr>', { noremap = true, desc = 'Previous quickfix item', })
+    end,
+  },
 }
