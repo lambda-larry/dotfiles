@@ -35,7 +35,6 @@ M.default = {
     map('n', '<leader>lc',  vim.lsp.buf.code_action,     'Code action',          capabilities.codeActionProvider)
 
     client.server_capabilities.semanticTokensProvider = nil
-    require('completion').on_attach(client, bufnr)
   end,
   handlers = {
     ['textDocument/hover']         = vim.lsp.with(vim.lsp.handlers.hover,          { border = border }),

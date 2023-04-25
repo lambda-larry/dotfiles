@@ -1,6 +1,5 @@
 return {
-  server = {
-    on_attach = require('kagutsuchi.lsp.config').default.on_attach,
+  server = vim.tbl_extend('force', require('kagutsuchi.lsp.config').default, {
     settings = {
       ['rust-analyzer'] = {
         cargo = {
@@ -13,5 +12,5 @@ return {
         },
       },
     },
-  },
+  }),
 }
