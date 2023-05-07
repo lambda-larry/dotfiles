@@ -43,6 +43,9 @@ M.default = {
   flags = {
     debounce_text_changes = 300,
   },
+  capabilities = require('cmp_nvim_lsp').default_capabilities({
+    snippetSupport = false,
+  }),
 }
 
 function M.config(server)
