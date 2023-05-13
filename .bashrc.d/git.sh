@@ -1,12 +1,7 @@
-# Wrapper function for git
-function git() {
-	local args=()
-
-	# Use dotfiles repo as default if cwd is not a git repo and is inside
-	# home.
-	if [[ $PWD =~ ^$HOME ]] && ! command git status >/dev/null 2>/dev/null; then
-		args+=(--git-dir "$DOTFILES_DIR/.git")
-	fi
+function dotfile() {
+	local args=(
+		--git-dir "$DOTFILES_DIR/.git"
+	)
 
 	# If no command has been supplied, use status as default.
 	if [ $# = 0 ]; then
