@@ -13,6 +13,11 @@ return {
       window = {
         border = 'single',
       },
+      layout = {
+        height = { min = 1, },
+        spacing = 2,
+        align = 'center',
+      },
     },
     config = function(_, opts)
       vim.o.timeout    = true
