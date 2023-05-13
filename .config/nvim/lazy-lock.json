@@ -19,6 +19,7 @@
   "plenary.nvim": { "branch": "master", "commit": "9ac3e9541bbabd9d73663d757e4fe48a675bb054" },
   "qf.nvim": { "branch": "main", "commit": "33720f0cba45f6bc975043aeec98d44a02f2ed61" },
   "rust-tools.nvim": { "branch": "master", "commit": "71d2cf67b5ed120a0e31b2c8adb210dd2834242f" },
+  "telescope.nvim": { "branch": "0.1.1", "commit": "c1a2af0af69e80e14e6b226d3957a064cd080805" },
   "vim-repeat": { "branch": "master", "commit": "24afe922e6a05891756ecf331f39a1f6743d3d5a" },
   "vim-slime": { "branch": "main", "commit": "bb152854fc21193729bf587aa055e738d50c8b48" },
   "vim-startify": { "branch": "master", "commit": "81e36c352a8deea54df5ec1e2f4348685569bed2" },

@@ -29,6 +29,15 @@ return {
           name  = '+lsp',
           g = { name = '+goto', },
         },
+        ['<leader>b']  = {
+          name  = '+buffer',
+        },
+        ['<leader>f']  = {
+          name  = '+files',
+        },
+        ['<leader><leader>']  = {
+          name  = '+quick-action',
+        },
       })
     end,
   },

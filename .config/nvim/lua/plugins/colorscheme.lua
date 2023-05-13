@@ -15,6 +15,10 @@ return {
         italic_comment = true,
 
         overrides = {
+          Normal          = {                     bg = 'none', },
+          NormalFloat     = {                     bg = 'none', },
+          FloatBorder     = { fg = colors.purple, bg = 'none', },
+
           StartifyBracket = { fg = colors.fg,                  },
           StartifyFile    = { fg = colors.fg,                  },
           StartifyFooter  = { fg = colors.green,  bold = true, },
@@ -25,17 +29,16 @@ return {
           StartifySelect  = { fg = colors.green,  bold = true, },
           StartifySlash   = { fg = colors.fg,                  },
           StartifySpecial = { fg = colors.comment,             },
+
+          TelescopeNormal        = { fg = colors.fg, bg = 'none', },
+          TelescopeBorder        = { link =     'FloatBorder' },
+          TelescopeResultsBorder = { link = 'TelescopeBorder' },
+          TelescopePreviewBorder = { link = 'TelescopeBorder' },
+          TelescopePromptBorder  = { link = 'TelescopeBorder' },
+          TelescopeTitle         = { link =           'Title' },
         },
       })
       vim.cmd('colorscheme dracula')
-
-      local highlight_groups = {
-        'Normal', 'NormalFloat', 'FloatBorder',
-      }
-
-      for _, highlight in pairs(highlight_groups) do
-        vim.api.nvim_set_hl(0, highlight, { bg = 'none', ctermbg = 'none' })
-      end
     end,
   },
 }
