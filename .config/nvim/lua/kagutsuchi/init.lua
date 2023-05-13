@@ -26,6 +26,7 @@ function M.setup(opts)
     -- All modes blink the cursor.
     'a:blinkon250-blinkoff250',
   }
+  vim.opt.completeopt:remove('preview')
 
   if supported_platform() and not is_super_user() then
     require('kagutsuchi.bootstrap')
