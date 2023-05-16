@@ -88,4 +88,34 @@ return {
       vim.keymap.set('n', '[q', '<cmd>cprevious<cr>', { noremap = true, desc = 'Previous quickfix item', })
     end,
   },
+  {
+    'mbbill/undotree',
+    config = function()
+
+      -- Do not highlight cursor line on undotree buffer
+      vim.g.undotree_CursorLine = 0
+
+      -- Style 3
+      -- +------------------------+----------+
+      -- |                        |          |
+      -- |                        |          |
+      -- |                        | undotree |
+      -- |                        |          |
+      -- |                        |          |
+      -- |                        +----------+
+      -- |                        |          |
+      -- |                        |   diff   |
+      -- |                        |          |
+      -- +------------------------+----------+
+      vim.g.undotree_WindowLayout = 3
+
+
+      if vim.fn.has('persistent_undo') then
+        vim.o.undofile = true
+      end
+
+      vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { noremap = true, silent = true, desc = 'Undo tree' })
+      vim.keymap.set('n', 'U', vim.cmd.UndotreeToggle, { noremap = true, silent = true, desc = 'Undo tree' })
+    end,
+  },
 }
