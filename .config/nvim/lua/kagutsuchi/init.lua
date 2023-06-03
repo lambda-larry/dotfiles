@@ -31,6 +31,8 @@ function M.setup(opts)
   vim.opt.splitbelow = true
   vim.opt.splitright = true
 
+  require('kagutsuchi.keymap')
+
   if supported_platform() and not is_super_user() then
     require('kagutsuchi.bootstrap')
   end
