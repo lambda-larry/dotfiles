@@ -28,6 +28,9 @@ function M.setup(opts)
   }
   vim.opt.completeopt:remove('preview')
 
+  vim.opt.splitbelow = true
+  vim.opt.splitright = true
+
   if supported_platform() and not is_super_user() then
     require('kagutsuchi.bootstrap')
   end
