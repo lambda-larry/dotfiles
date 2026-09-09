@@ -1,6 +1,6 @@
 -include local.mk
 
-HOST := $(hostname)
+HOST := ${HOSTNAME}
 
 -include hosts/${HOST}.mk
 -include hosts/${USER}.mk
