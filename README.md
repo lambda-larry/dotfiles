@@ -14,3 +14,10 @@ make PREFIX=${HOME}
 make PREFIX=${PWD}/local
 make PREFIX=/mnt/gentoo/home/${USER}
 ```
+
+## TODO
+
+- [ ] Secret management
+- [ ] Template
+
+<!-- vim: set spell spelllang=en: -->
