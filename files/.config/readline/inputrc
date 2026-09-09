@@ -1,0 +1,33 @@
+# Color files by types
+# Note that this may cause completion text blink in some terminals (e.g. xterm).
+set colored-stats On
+# Append char to indicate type
+set visible-stats On
+# Mark symlinked directories
+set mark-symlinked-directories On
+# Color the common prefix
+set colored-completion-prefix On
+# Color the common prefix in menu-complete
+set menu-complete-display-prefix On
+# Briefly move the cursor to an opening parenthesis when a closing parenthesis is inserted
+set blink-matching-paren On
+
+
+$if gdb
+# <F5> run
+"\e[15~": "\C-e\C-urun\n"
+# <F6> continue
+"\e[17~": "\C-e\C-ucontinue\n"
+# <F7> step
+"\e[18~": "\C-e\C-ustep\n"
+# <F8> next
+"\e[19~": "\C-e\C-unext\n"
+# <F9> finish
+"\e[20~": "\C-e\C-ufinish\n"
+# <F10> finish
+"\e[21~": "\C-e\C-uinterrupt\n"
+# <F11> until
+"\e[23~": "\C-e\C-uuntil\n"
+$endif
+
+# vim: set filetype=readline:
