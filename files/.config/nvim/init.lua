@@ -378,7 +378,7 @@ vim.pack.add({
     src = 'https://github.com/jpalardy/vim-slime',
     data = {
       config = function(spec)
-        vim.g.slime_paste_file = vim.env.XDG_RUNTIME_DIR .. '/.slime_paste'
+        vim.g.slime_paste_file = vim.fn.stdpath('run') .. '/.slime_paste'
 
         vim.g.slime_target = 'neovim'
 
