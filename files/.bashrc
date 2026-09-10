@@ -26,7 +26,7 @@ export VISUAL=nvim
 export GPG_TTY=$(tty)
 
 [[ "$EDITOR" == nvim ]] && export MANPAGER='nvim +Man!'
- 
+
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
@@ -39,8 +39,8 @@ if [[ -x /usr/bin/ksshaskpass ]]; then
 	export SSH_ASKPASS_REQUIRE=prefer
 fi
 
-if [[ -n $DBUS_SESSION_BUS_ADDRESS 
-	&& -n $XDG_RUNTIME_DIR 
+if [[ -n $DBUS_SESSION_BUS_ADDRESS
+	&& -n $XDG_RUNTIME_DIR
 	&& $(systemctl is-active --user ssh-agent.service) == "active" ]]; then
 	export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 fi
@@ -52,6 +52,9 @@ if [[ -r $XDG_CONFIG_HOME/dircolor ]]; then
 	fi
 	load "$HOME/.bashrc.d/dircolor"
 fi
+
+export PYTHON_HISTORY=/dev/null
+export LESSHISTFILE=/dev/null
 
 # }}}
 # {{{ alias
