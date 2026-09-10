@@ -19,5 +19,6 @@ make PREFIX=/mnt/gentoo/home/${USER}
 
 - [ ] Secret management
 - [ ] Template
+- [ ] Diff tool
 
 <!-- vim: set spell spelllang=en: -->
