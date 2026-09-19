@@ -14,7 +14,7 @@ function load() {
 # }}}
 # {{{ prompt
 # load "$HOME/.bashrc.d/gentoo-prompt.sh"
-PS1='\[\033[01;31m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\] '
+PS1='\[\033[01;31m\]\h\[\033[01;34m\] \w \$\[\033[00m\] '
 # }}}
 # {{{ bash setting
 HISTFILE=/dev/null
