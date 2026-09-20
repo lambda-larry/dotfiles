@@ -124,7 +124,7 @@ if [ "$(type -t __git_complete)" = function ]; then
 fi
 # }}}
 # {{{ telemetry
-export DOTNET_CLI_TELEMETRY_OPTION=1
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
 # }}}
 
 # vim: set foldmethod=marker:
