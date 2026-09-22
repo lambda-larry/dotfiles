@@ -137,7 +137,10 @@ augroup sensitive
   autocmd BufNewFile,BufRead /**/doctl/config.yaml setlocal noundofile
 
 augroup END
+]]
 
+vim.cmd [[
+autocmd BufNewFile,BufRead kea-dhcp[46].conf setlocal filetype=json5
 ]]
 
 
