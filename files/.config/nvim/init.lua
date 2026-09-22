@@ -140,7 +140,8 @@ augroup END
 ]]
 
 vim.cmd [[
-autocmd BufNewFile,BufRead kea-dhcp[46].conf setlocal filetype=json5
+autocmd BufNewFile,BufRead kea-dhcp[46].conf  setlocal filetype=json5
+autocmd BufNewFile,BufRead kea-dhcp-ddns.conf setlocal filetype=json5
 ]]
 
 
