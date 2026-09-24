@@ -1,0 +1,15 @@
+#!/bin/sh
+
+export NNN_FCOLORS="D4DEB778E79F9F67D2E5E5D2"
+NNN_OPTS=""
+NNN_OPTS+="E" # use $EDITOR for internal undetached edits
+NNN_OPTS+="e" # Open text files in $VISUAL or $EDITOR
+NNN_OPTS+="r" # Show cp, mv progress
+NNN_OPTS+="o" # Open files only on Enter key
+NNN_OPTS+="x" # Show notifications on selection completion
+NNN_OPTS+="H" # Show hidden file
+NNN_OPTS+="z" # Fuzzy search
+export NNN_OPTS="${NNN_OPTS}"
+
+alias n3=nnn
+alias n=nnn

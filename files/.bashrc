@@ -56,6 +56,7 @@ fi
 export PYTHON_HISTORY=/dev/null
 export LESSHISTFILE=/dev/null
 
+load "$XDG_CONFIG_HOME/nnn/config"
 # }}}
 # {{{ alias
 alias vim=nvim
