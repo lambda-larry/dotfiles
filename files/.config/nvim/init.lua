@@ -728,4 +728,13 @@ vim.pack.add({
     end
   end,
 })
+vim.api.nvim_create_autocmd('PackChanged', {
+  callback = function(ev)
+    if ev.data.spec.data then
+      if ev.data.spec.data.hook then
+        ev.data.spec.data.hook(ev)
+      end
+    end
+  end,
+})
 
