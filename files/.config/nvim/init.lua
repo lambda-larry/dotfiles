@@ -407,27 +407,19 @@ vim.pack.add({
     src = 'https://github.com/nvim-lua/plenary.nvim',
   },
   {
-    src = 'https://github.com/neovim-treesitter/treesitter-parser-registry',
-  },
-  {
-    src = 'https://github.com/neovim-treesitter/nvim-treesitter',
+    src = 'https://github.com/nvim-treesitter/nvim-treesitter',
+    version = 'main',
     data = {
+      hook = function(ev)
+        local kind = ev.data.kind
+
+        if 'install' == kind or 'update' == kind then
+          vim.cmd('TSUpdate')
+        end
+
+      end,
       config = function(spec)
         local nvim_treesitter = require('nvim-treesitter')
-        nvim_treesitter.setup({
-          local_parsers = {
-            c3 = {
-              source = {
-                type         = 'self_contained',
-                url          = 'https://github.com/c3lang/tree-sitter-c3',
-                semver       = true,
-                queries_path = 'queries',
-              },
-              filetypes = { 'c3' },
-            },
-          },
-        })
-
         vim.api.nvim_create_autocmd('FileType', {
           pattern = vim.list_extend(
             {'sh'},
@@ -438,11 +430,8 @@ vim.pack.add({
             vim.wo.foldlevel  = 999
             vim.wo.foldmethod = 'expr'
             vim.wo.foldexpr   = 'v:lua.vim.treesitter.foldexpr()'
-            -- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
           end,
         })
-
-        vim.opt.foldlevel  = 999
       end,
     },
   },
