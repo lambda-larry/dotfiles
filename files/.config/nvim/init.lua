@@ -333,12 +333,16 @@ vim.pack.add({
     data = {
       config = function(spec)
         vim.g.startify_lists                = {
-          { ['type'] = 'bookmarks', headers = '   Bookmarks' },
           { ['type'] = 'commands',  headers = '   Commands' },
+          { ['type'] = 'bookmarks', headers = '   Bookmarks' },
         }
 
         vim.g.startify_bookmarks            = {
           { n = '~/.config/nvim/init.lua' },
+        }
+        vim.g.startify_commands             = {
+          { t = { 'Task',          'Tw'         }, },
+          { c = { 'Task Calendar', 'TwCalendar' }, },
         }
         vim.g.startify_fortune_use_unicode  = 1
         vim.g.startify_change_to_vcs_root   = 1
@@ -527,6 +531,15 @@ vim.pack.add({
         vim.keymap.set('n', '<leader>m', builtins.marks,         { noremap = true, silent = true });
         vim.keymap.set('n', 'z=',        builtins.spell_suggest, { noremap = true, silent = true });
 
+      end,
+    },
+  },
+  {
+    src = 'https://github.com/MattHandzel/taskwarrior.nvim',
+    data = {
+      config = function(spec)
+        require('taskwarrior').setup({
+        })
       end,
     },
   },

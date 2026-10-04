@@ -40,6 +40,10 @@
       "rev": "a798325b7f36acc62741d1029930a7b96d4dd4bf",
       "src": "https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git"
     },
+    "taskwarrior.nvim": {
+      "rev": "8dce054ed836b540e399ddfa41cd4b39f45e9ca6",
+      "src": "https://github.com/MattHandzel/taskwarrior.nvim"
+    },
     "telescope.nvim": {
       "rev": "5255aa27c422de944791318024167ad5d40aad20",
       "src": "https://github.com/nvim-telescope/telescope.nvim",
