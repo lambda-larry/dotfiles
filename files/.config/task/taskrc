@@ -1,0 +1,6 @@
+# vim: set ft=taskrc:
+
+data.location=~/.local/share/task
+news.version=3.5.0
+
+include ~/.config/task/dracula.theme
