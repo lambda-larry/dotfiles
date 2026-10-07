@@ -20,3 +20,7 @@ deploy:
 
 ${PREFIX}/%: files/%
 	install -Dm ${MODE} $< $@
+
+# Only install if the content is different (prevent flicker on make -B)
+${PREFIX}/%/picom.conf: files/%/picom.conf
+	cmp $< $@ || install -Dm ${MODE} $< $@
