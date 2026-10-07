@@ -42,7 +42,7 @@ fi
 if [[ -n $DBUS_SESSION_BUS_ADDRESS
 	&& -n $XDG_RUNTIME_DIR
 	&& $(systemctl is-active --user ssh-agent.service) == "active" ]]; then
-	export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+	export SSH_AUTH_SOCK="${SSH_AUTH_SOCK:-$XDG_RUNTIME_DIR/ssh-agent.socket}"
 fi
 
 
