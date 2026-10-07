@@ -140,6 +140,11 @@ augroup END
 ]]
 
 vim.cmd [[
+autocmd BufNewFile,BufRead */.ssh/known_hosts   setlocal filetype=sshconfig
+autocmd BufNewFile,BufRead */.ssh/known_hosts.* setlocal filetype=sshconfig
+]]
+
+vim.cmd [[
 autocmd BufNewFile,BufRead kea-dhcp[46].conf  setlocal filetype=json5
 autocmd BufNewFile,BufRead kea-dhcp-ddns.conf setlocal filetype=json5
 ]]
