@@ -21,3 +21,5 @@
 	workers = 0
 [log]
 	date = iso
+[gpg "ssh"]
+	allowedSignersFile = ~/.config/git/allowed_signers
