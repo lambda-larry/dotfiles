@@ -1,12 +1,11 @@
--include local.mk
-
 HOST := ${HOSTNAME}
+PREFIX ?= ${HOME}
+
+-include local.mk
 
 -include hosts/${HOST}.mk
 -include hosts/${USER}.mk
 -include hosts/${HOST}-${USER}.mk
-
-PREFIX ?= ${HOME}
 
 deploy:
 
