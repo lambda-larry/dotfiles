@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+TEMPLATE="$(basename $0 | cut -d - -f 3)"
+
+git init "$@"
+rsync -ra "$HOME/.config/git/template/$TEMPLATE/" .
