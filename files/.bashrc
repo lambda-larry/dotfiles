@@ -58,6 +58,9 @@ export LESSHISTFILE=/dev/null
 
 load "$XDG_CONFIG_HOME/nnn/config"
 # }}}
+# {{{ PATH
+export PATH="$HOME/.local/bin:$PATH"
+# }}}
 # {{{ alias
 alias vim=nvim
 alias v=nvim
