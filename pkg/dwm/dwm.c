@@ -204,6 +204,8 @@ static void setmfact(const Arg *arg);
 static void setup(void);
 static void seturgent(Client *c, int urg);
 static void showhide(Client *c);
+static void sighup(int unused);
+static void sigterm(int unused);
 static void spawn(const Arg *arg);
 static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
@@ -259,6 +261,7 @@ static void (*handler[LASTEvent]) (XEvent *) = {
 	[UnmapNotify] = unmapnotify
 };
 static Atom wmatom[WMLast], netatom[NetLast];
+static int restart = 0;
 static int running = 1;
 static Cur *cursor[CurLast];
 static Clr **scheme;
@@ -1255,10 +1258,96 @@ propertynotify(XEvent *e)
 	}
 }
 
+#ifndef SESSION_FILE
+#define SESSION_FILE "/tmp/dwm-session"
+#endif
+
+static void
+savesession(void)
+{
+	FILE *fw = fopen(SESSION_FILE, "w");
+
+	// Dump selected tags for every monitor
+	for (Monitor *m = selmon; m; m = m->next)
+		fprintf(fw, "mon: %u %u %u\n", m->seltags, m->tagset[0], m->tagset[1]);
+
+	// Get all the clients with their tags and write them to the file
+	for (Client *c = selmon->clients; c != NULL; c = c->next) {
+		fprintf(fw, "%lu %u %d %d %d %d %d %d %d %d %d\n",
+			c->win,  c->tags,
+			c->x,    c->y,
+			c->w,    c->h,
+			c->oldx, c->oldy,
+			c->oldw, c->oldh,
+			c->isfloating
+		);
+	}
+	fclose(fw);
+}
+
+static void
+restoresession(void)
+{
+	// Restore session
+	FILE *fr = fopen(SESSION_FILE, "r");
+	if (!fr)
+		return;
+
+	for (Monitor *m = selmon; m; m = m->next)
+		fscanf(fr, "mon: %u %u %u\n", &m->seltags, &m->tagset[0], &m->tagset[1]);
+
+
+	char str[160];
+	while (EOF != fscanf(fr, "%160[^\n] ", str)) {
+		Client info = {0};
+		if (11 != sscanf(str, "%lu %u %d %d %d %d %d %d %d %d %d",
+			&info.win,  &info.tags,
+			&info.x,    &info.y,
+			&info.w,    &info.h,
+			&info.oldx, &info.oldy,
+			&info.oldw, &info.oldh,
+			&info.isfloating
+		))
+			break;
+
+		// Add info to window by winId
+		for (Client *c = selmon->clients; c ; c = c->next) {
+			if (c->win == info.win) {
+				c->tags       = info.tags;
+				c->isfloating = info.isfloating;
+
+				resizeclient(c, info.x, info.y, info.w, info.h);
+				c->oldx       = info.oldx;
+				c->oldy       = info.oldy;
+				c->oldw       = info.oldw;
+				c->oldh       = info.oldh;
+
+				break;
+			}
+		}
+	}
+
+	// Refocus on windows
+	for (Client *c = selmon->clients; c ; c = c->next) {
+		focus(c);
+		restack(c->mon);
+	}
+
+	// Rearrange all monitors
+	for (Monitor *m = selmon; m; m = m->next)
+		arrange(m);
+
+	fclose(fr);
+}
+
+
 void
 quit(const Arg *arg)
 {
 	running = 0;
+
+	if ((restart = arg->i))
+		savesession();
 }
 
 Monitor *
@@ -1553,6 +1642,9 @@ setup(void)
 	/* clean up any zombies (inherited from .xinitrc etc) immediately */
 	while (waitpid(-1, NULL, WNOHANG) > 0);
 
+	signal(SIGHUP, sighup);
+	signal(SIGTERM, sigterm);
+
 	/* init screen */
 	screen = DefaultScreen(dpy);
 	sw = DisplayWidth(dpy, screen);
@@ -1642,6 +1734,20 @@ showhide(Client *c)
 		showhide(c->snext);
 		XMoveWindow(dpy, c->win, WIDTH(c) * -2, c->y);
 	}
+}
+
+void
+sighup(int unused)
+{
+	Arg a = {.i = 1};
+	quit(&a);
+}
+
+void
+sigterm(int unused)
+{
+	Arg a = {.i = 0};
+	quit(&a);
 }
 
 void
@@ -2158,7 +2264,9 @@ main(int argc, char *argv[])
 		die("pledge");
 #endif /* __OpenBSD__ */
 	scan();
+	restoresession();
 	run();
+	if(restart) execvp(argv[0], argv);
 	cleanup();
 	XCloseDisplay(dpy);
 	return EXIT_SUCCESS;
