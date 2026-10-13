@@ -1,0 +1,15 @@
+dwm.foreground     : #BBBBBB
+dwm.background     : #222222
+dwm.border         : #444444
+dwm.font           : monospace:size=10
+dwm.dmenufont      : monospace:size=10
+dwm.foreground-sel : #EEEEEE
+dwm.background-sel : #005577
+dwm.border-sel     : #005577
+dwm.borderpx       : 1
+dwm.snap           : 32
+dwm.showbar        : 1
+dwm.topbar         : 1
+dwm.nmaster        : 1
+dwm.resizehints    : 1
+dwm.mfact          : 0.55
