@@ -20,6 +20,8 @@ clean-dwm:
 pkg/dwm/%.o: CC       := gcc
 pkg/dwm/%.o: CFLAGS   := -std=c99 -pedantic
 pkg/dwm/%.o: CFLAGS   += -Wall
+pkg/dwm/%.o: CFLAGS   += -Wno-deprecated-declarations
+pkg/dwm/%.o: CFLAGS   += -Wno-stringop-truncation
 pkg/dwm/%.o: CFLAGS   += -O2
 pkg/dwm/%.o: CPPFLAGS += -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700 -D_POSIX_C_SOURCE=200809L
 pkg/dwm/%.o: CPPFLAGS += -DVERSION='"$(VERSION)"'
