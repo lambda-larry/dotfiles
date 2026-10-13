@@ -30,7 +30,7 @@ pkg/slstatus/slstatus: LDFLAGS += $(shell pkg-config --libs x11)
 
 
 pkg/slstatus/%.o: pkg/slstatus/slstatus.h
-pkg/slstatus/slstatus.o: pkg/slstatus/arg.h pkg/slstatus/config.h pkg/slstatus/util.h
+pkg/slstatus/slstatus.o: pkg/slstatus/arg.h pkg/slstatus/config.h pkg/slstatus/config.def.h pkg/slstatus/util.h
 
 pkg/slstatus/slstatus: pkg/slstatus/slstatus.o pkg/slstatus/util.o $(patsubst %.c, %.o, $(wildcard pkg/slstatus/components/*.c))
 
