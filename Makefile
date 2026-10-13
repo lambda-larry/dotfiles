@@ -10,10 +10,12 @@ PREFIX ?= ${HOME}
 deploy:
 
 -include .index.d
+-include .mode.d
 
-.index.d: Makefile $(shell find files/ -type d)
-	@echo -n > $@
-	@find files/ -type f -printf 'deploy: $${PREFIX}/%P\n$${PREFIX}/%P: MODE := %#m\n' >> $@
+.index.d .mode.d: Makefile $(shell find files/ -type d)
+	@find files/ -type f \
+		-fprintf .index.d 'deploy: $${PREFIX}/%P\n' \
+		-fprintf .mode.d  '$${PREFIX}/%P: MODE := %#m\n'
 
 
 ${PREFIX}/%: files/%
