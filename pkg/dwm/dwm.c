@@ -2640,7 +2640,7 @@ main(int argc, char *argv[])
 	scan();
 	restoresession();
 	run();
-	if(restart) execvp(argv[0], argv);
+	if (restart) execvp(argv[0], argv);
 	cleanup();
 	XCloseDisplay(dpy);
 	return EXIT_SUCCESS;
