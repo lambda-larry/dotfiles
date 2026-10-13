@@ -31,7 +31,7 @@ pkg/dwm/dwm: LDFLAGS += $(shell pkg-config --libs fontconfig)
 pkg/dwm/dwm: LDFLAGS += $(shell pkg-config --libs xft)
 pkg/dwm/dwm: LDFLAGS += $(shell pkg-config --libs xinerama)
 
-pkg/dwm/%.o: pkg/dwm/config.h pkg/dwm/util.h
+pkg/dwm/%.o: pkg/dwm/config.h pkg/dwm/config.def.h pkg/dwm/util.h
 pkg/dwm/dwm: pkg/dwm/dwm.o pkg/dwm/drw.o pkg/dwm/util.o
 
 ${PREFIX}/lambda-larry/prefix/bin/%: pkg/dwm/%
