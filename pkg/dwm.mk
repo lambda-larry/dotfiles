@@ -18,7 +18,7 @@ clean-dwm:
 	$(RM) pkg/dwm/dwm pkg/dwm/*.o
 
 pkg/dwm/%.o: CC       := gcc
-pkg/dwm/%.o: CFLAGS   := -std=c99 -pedantic
+pkg/dwm/%.o: CFLAGS   := -std=c23 -pedantic
 pkg/dwm/%.o: CFLAGS   += -Wall
 pkg/dwm/%.o: CFLAGS   += -Wno-deprecated-declarations
 pkg/dwm/%.o: CFLAGS   += -Wno-stringop-truncation
