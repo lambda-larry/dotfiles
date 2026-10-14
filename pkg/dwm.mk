@@ -23,6 +23,7 @@ pkg/dwm/%.o: CFLAGS   += -Wall
 pkg/dwm/%.o: CFLAGS   += -Wno-deprecated-declarations
 pkg/dwm/%.o: CFLAGS   += -Wno-stringop-truncation
 pkg/dwm/%.o: CFLAGS   += -O2
+pkg/dwm/%.o: CPPFLAGS += -MMD
 pkg/dwm/%.o: CPPFLAGS += -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700 -D_POSIX_C_SOURCE=200809L
 pkg/dwm/%.o: CPPFLAGS += -DVERSION='"$(VERSION)"'
 pkg/dwm/%.o: CPPFLAGS += -DXINERAMA
@@ -33,7 +34,7 @@ pkg/dwm/dwm: LDFLAGS += $(shell pkg-config --libs fontconfig)
 pkg/dwm/dwm: LDFLAGS += $(shell pkg-config --libs xft)
 pkg/dwm/dwm: LDFLAGS += $(shell pkg-config --libs xinerama)
 
-pkg/dwm/%.o: pkg/dwm/config.h pkg/dwm/config.def.h pkg/dwm/util.h
+-include $(wildcard pkg/dwm/*.d)
 pkg/dwm/dwm: pkg/dwm/dwm.o pkg/dwm/drw.o pkg/dwm/util.o
 
 ${PREFIX}/lambda-larry/prefix/bin/%: pkg/dwm/%

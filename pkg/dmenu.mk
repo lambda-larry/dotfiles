@@ -29,6 +29,7 @@ pkg/dmenu/%.o: CC       := gcc
 pkg/dmenu/%.o: CFLAGS   := -std=c99 -pedantic
 pkg/dmenu/%.o: CFLAGS   += -Wall
 pkg/dmenu/%.o: CFLAGS   += -O2
+pkg/dmenu/%.o: CPPFLAGS += -MMD
 pkg/dmenu/%.o: CPPFLAGS += -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700 -D_POSIX_C_SOURCE=200809L
 pkg/dmenu/%.o: CPPFLAGS += -DVERSION='"5.4"'
 pkg/dmenu/%.o: CPPFLAGS += -DXINERAMA
@@ -40,8 +41,7 @@ pkg/dmenu/dmenu: LDFLAGS += $(shell pkg-config --libs xft)
 pkg/dmenu/dmenu: LDFLAGS += $(shell pkg-config --libs xinerama)
 
 
-pkg/dmenu/%.o: pkg/dmenu/arg.h pkg/dmenu/config.h pkg/dmenu/config.def.h pkg/dmenu/drw.h
-
+-include $(wildcard pkg/dmenu/*.d)
 pkg/dmenu/dmenu: pkg/dmenu/dmenu.o pkg/dmenu/drw.o pkg/dmenu/util.o
 pkg/dmenu/stest: pkg/dmenu/stest.o
 
