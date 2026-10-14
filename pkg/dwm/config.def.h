@@ -1,5 +1,8 @@
 /* See LICENSE file for copyright and license details. */
 
+#define ICONSIZE 16
+#define ICONSPACING 4
+
 /* appearance */
 static unsigned int borderpx  = 1;        /* border pixel of windows */
 static unsigned int snap      = 32;       /* snap pixel */

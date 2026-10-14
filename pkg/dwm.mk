@@ -33,6 +33,7 @@ pkg/dwm/dwm: LDFLAGS += $(shell pkg-config --libs x11)
 pkg/dwm/dwm: LDFLAGS += $(shell pkg-config --libs fontconfig)
 pkg/dwm/dwm: LDFLAGS += $(shell pkg-config --libs xft)
 pkg/dwm/dwm: LDFLAGS += $(shell pkg-config --libs xinerama)
+pkg/dwm/dwm: LDFLAGS += $(shell pkg-config --libs imlib2 xrender)
 
 -include $(wildcard pkg/dwm/*.d)
 pkg/dwm/dwm: pkg/dwm/dwm.o pkg/dwm/drw.o pkg/dwm/util.o
