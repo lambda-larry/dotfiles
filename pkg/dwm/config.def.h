@@ -58,7 +58,8 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", "monospace:size=10", "-nb", "#222222", "-nf", "#bbbbbb", "-sb", "#005577", "-sf", "#eeeeee", NULL };
-static const char *termcmd[]  = { "kitty", NULL };
+static const char *termcmd[]   = { "kitty", NULL };
+static const char *i3lockcmd[] = { "i3lock", "-k", "-c", "#222222", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -97,6 +98,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	{ MODKEY|ShiftMask,             XK_r,      quit,           {1} },
 	{ MODKEY,                       XK_F5,     xresreload,     {0} },
+	{ MODKEY,                       XK_x,      spawn,          {.v = i3lockcmd } },
 };
 
 /* button definitions */
@@ -138,4 +140,5 @@ static const XResPref resources[] = {
 	{  "dwm.nmaster",        INTEGER, &nmaster                       },
 	{  "dwm.resizehints",    INTEGER, &resizehints                   },
 	{  "dwm.mfact",          FLOAT,   &mfact                         },
+	{  "dwm.background",     STRING,  &i3lockcmd[3]                  },
 };
