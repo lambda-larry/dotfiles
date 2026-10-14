@@ -61,8 +61,16 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", "monospace:size=10", "-nb", "#222222", "-nf", "#bbbbbb", "-sb", "#005577", "-sf", "#eeeeee", NULL };
+static char *passmenucmd[] = { "passmenu", "-m", dmenumon, "-fn", "monospace:size=10", "-nb", "#222222", "-nf", "#bbbbbb", "-sb", "#005577", "-sf", "#eeeeee", "-l", "20", NULL };
 static const char *termcmd[]   = { "kitty", NULL };
 static const char *i3lockcmd[] = { "i3lock", "-k", "-c", "#222222", NULL };
+
+#define EXEC(...) .func = spawn, .arg = { .v = (const char *[]){ __VA_ARGS__, NULL } }
+
+#define PRISM(...)   EXEC("playerctl", __VA_ARGS__)
+#define TERMCMD(...) EXEC("kitty",     __VA_ARGS__)
+
+#include <X11/XF86keysym.h>
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -101,7 +109,24 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	{ MODKEY|ShiftMask,             XK_r,      quit,           {1} },
 	{ MODKEY,                       XK_F5,     xresreload,     {0} },
-	{ MODKEY,                       XK_x,      spawn,          {.v = i3lockcmd } },
+
+	{ MODKEY|ShiftMask, XK_p, spawn, {.v = passmenucmd } },
+
+	{ MODKEY, XK_x, spawn, {.v = i3lockcmd } },
+	{ MODKEY, XK_o, EXEC("setxkbmap", "-option", "ctrl:nocaps,grp:alt_shift_toggle", "-layout", "us,dk") },
+	{ MODKEY, XK_e, TERMCMD("tn3") },
+	{ MODKEY, XK_u, TERMCMD("htop") },
+	{ MODKEY, XK_n, TERMCMD("ncmpcpp") },
+	{ MODKEY, XK_c, TERMCMD("nvim", "+TwCalendar", "+vsplit", "+Tw") },
+
+
+	{ .keysym = XF86XK_AudioPlay, PRISM("play-pause"), },
+	{ .keysym = XF86XK_AudioStop, PRISM("stop"),       },
+	{ .keysym = XF86XK_AudioPrev, PRISM("previous"),   },
+	{ .keysym = XF86XK_AudioNext, PRISM("next"),       },
+
+
+
 };
 
 /* button definitions */
@@ -131,6 +156,11 @@ static const XResPref resources[] = {
 	{  "dwm.foreground",     STRING,  &dmenucmd[8]                   },
 	{  "dwm.background-sel", STRING,  &dmenucmd[10]                  },
 	{  "dwm.foreground-sel", STRING,  &dmenucmd[12]                  },
+	{  "dwm.dmenufont",      STRING,  &passmenucmd[4]                },
+	{  "dwm.background",     STRING,  &passmenucmd[6]                },
+	{  "dwm.foreground",     STRING,  &passmenucmd[8]                },
+	{  "dwm.background-sel", STRING,  &passmenucmd[10]               },
+	{  "dwm.foreground-sel", STRING,  &passmenucmd[12]               },
 	{  "dwm.foreground",     STRING,  &colors[SchemeNorm][ColFg]     },
 	{  "dwm.background",     STRING,  &colors[SchemeNorm][ColBg]     },
 	{  "dwm.border",         STRING,  &colors[SchemeNorm][ColBorder] },
