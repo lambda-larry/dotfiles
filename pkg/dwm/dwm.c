@@ -1428,21 +1428,28 @@ savesession(void)
 {
 	FILE *fw = fopen(SESSION_FILE, "w");
 
+	for (Monitor *m = mons; m; m = m->next)
+		if (m == selmon)
+			fprintf(fw, "selmon: %d\n", m->num);
+
 	// Dump selected tags for every monitor
-	for (Monitor *m = selmon; m; m = m->next)
+	for (Monitor *m = mons; m; m = m->next)
 		fprintf(fw, "mon: %u %u %u\n", m->seltags, m->tagset[0], m->tagset[1]);
 
 	// Get all the clients with their tags and write them to the file
-	for (Client *c = selmon->clients; c != NULL; c = c->next) {
-		fprintf(fw, "%lu %u %d %d %d %d %d %d %d %d %d\n",
-			c->win,  c->tags,
-			c->x,    c->y,
-			c->w,    c->h,
-			c->oldx, c->oldy,
-			c->oldw, c->oldh,
-			c->isfloating
-		);
+	for (Monitor *m = mons; m; m = m->next) {
+		for (Client *c = m->clients; c != NULL; c = c->next) {
+			fprintf(fw, "%lu %u %d %d %d %d %d %d %d %d %d %d\n",
+				c->win,  c->tags, c->mon->num,
+				c->x,    c->y,
+				c->w,    c->h,
+				c->oldx, c->oldy,
+				c->oldw, c->oldh,
+				c->isfloating
+			);
+		}
 	}
+
 	fclose(fw);
 }
 
@@ -1454,15 +1461,19 @@ restoresession(void)
 	if (!fr)
 		return;
 
-	for (Monitor *m = selmon; m; m = m->next)
+	int num = 0;
+	fscanf(fr, "selmon: %d\n", &num);
+
+	for (Monitor *m = mons; m; m = m->next)
 		fscanf(fr, "mon: %u %u %u\n", &m->seltags, &m->tagset[0], &m->tagset[1]);
 
 
 	char str[160];
 	while (EOF != fscanf(fr, "%160[^\n] ", str)) {
 		Client info = {0};
-		if (11 != sscanf(str, "%lu %u %d %d %d %d %d %d %d %d %d",
-			&info.win,  &info.tags,
+		int num = 0;
+		if (12 != sscanf(str, "%lu %u %d %d %d %d %d %d %d %d %d %d",
+			&info.win,  &info.tags, &num,
 			&info.x,    &info.y,
 			&info.w,    &info.h,
 			&info.oldx, &info.oldy,
@@ -1483,20 +1494,36 @@ restoresession(void)
 				c->oldw       = info.oldw;
 				c->oldh       = info.oldh;
 
+				for (Monitor *m = mons; m; m = m->next) {
+					if (num == m->num) {
+						sendmon(c, m);
+						c->tags = info.tags;
+						break;
+
+					}
+				}
+
 				break;
 			}
 		}
 	}
 
 	// Refocus on windows
-	for (Client *c = selmon->clients; c ; c = c->next) {
-		focus(c);
-		restack(c->mon);
-	}
+	for (Monitor *m = mons; m; m = m->next)
+		for (Client *c = m->clients; c ; c = c->next) {
+			focus(c);
+			restack(c->mon);
+		}
 
 	// Rearrange all monitors
-	for (Monitor *m = selmon; m; m = m->next)
+	for (Monitor *m = mons; m; m = m->next)
 		arrange(m);
+
+	unfocus(selmon->sel, 0);
+	for (Monitor *m = mons; m; m = m->next)
+		if (num == m->num)
+			selmon = m;
+	focus(NULL);
 
 	fclose(fr);
 }
