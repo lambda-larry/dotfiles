@@ -1013,7 +1013,7 @@ getatomprop(Client *c, Atom prop)
 }
 
 unsigned int
-getsystraywidth()
+getsystraywidth(void)
 {
 	unsigned int w = 0;
 	Client *i;
@@ -1474,7 +1474,7 @@ restoresession(void)
 
 
 	char str[160];
-	while (EOF != fscanf(fr, "%160[^\n] ", str)) {
+	while (EOF != fscanf(fr, "%159[^\n] ", str)) {
 		Client info = {0};
 		int num = 0;
 		if (12 != sscanf(str, "%lu %u %d %d %d %d %d %d %d %d %d %d",
