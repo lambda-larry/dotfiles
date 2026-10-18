@@ -11,11 +11,15 @@ deploy:
 
 -include .index.d
 -include .mode.d
+-include .os-release.d
 
 .index.d .mode.d: Makefile $(shell find files/ -type d)
 	@find files/ -type f \
 		-fprintf .index.d 'deploy: $${PREFIX}/%P\n' \
 		-fprintf .mode.d  '$${PREFIX}/%P: MODE := %#m\n'
+
+.os-release.d: /etc/os-release
+	@tools/bash2make -v prefix=OS_ < $< > $@
 
 
 ${PREFIX}/%: files/%

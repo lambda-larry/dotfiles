@@ -1,0 +1,6 @@
+#!/usr/bin/env -S awk -F = -f
+
+{
+	gsub("\"", "", $2)
+	printf("%s%s := %s\n", prefix, $1, $2)
+}
