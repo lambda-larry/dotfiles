@@ -43,7 +43,9 @@ pkg/nasm/%: LDFLAGS += -Wl,--gc-sections
 -include $(wildcard pkg/nasm/*/*.d)
 
 pkg/nasm/config/config.h:
-	@echo -n '' > $@
+	@touch $@
+
+pkg/nasm/%.o: pkg/nasm/config/config.h
 
 pkg/nasm/nasm: $(patsubst %.c, %.o, $(wildcard pkg/nasm/asm/*.c))
 pkg/nasm/nasm: $(patsubst %.c, %.o, $(wildcard pkg/nasm/common/*.c))
