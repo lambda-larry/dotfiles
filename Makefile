@@ -1,4 +1,4 @@
-HOST := ${HOSTNAME}
+HOST   ?= $(shell uname -n)
 PREFIX ?= ${HOME}
 
 -include local.mk
