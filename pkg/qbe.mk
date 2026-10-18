@@ -17,6 +17,22 @@ pkg/qbe/%.o: CFLAGS   := -std=c99 -pedantic
 pkg/qbe/%.o: CFLAGS   += -O2
 pkg/qbe/%.o: CPPFLAGS += -MMD
 
+ifeq ($(shell uname -s),Darwin)
+ifneq ($(filter arm%,$(shell uname -p)),)
+pkg/qbe/%.o: CPPFLAGS += -DDeftgt=T_arm64_apple
+endif
+ifeq ($(shell uname -m),x86_64)
+pkg/qbe/%.o: CPPFLAGS += -DDeftgt=T_amd64_apple
+endif
+else
+ifeq ($(shell uname -m),x86_64)
+pkg/qbe/%.o: CPPFLAGS += -DDeftgt=T_amd64_sysv
+endif
+ifneq ($(filter arm%,$(shell uname -m)),)
+pkg/qbe/%.o: CPPFLAGS += -DDeftgt=T_arm64
+endif
+endif
+
 pkg/qbe/qbe: LDFLAGS  += -static
 
 -include $(wildcard pkg/qbe/*.d)
@@ -31,32 +47,7 @@ pkg/qbe/qbe:
 	$(CC) $(LDFLAGS) $^ -o $@
 
 pkg/qbe/config.h:
-	@case `uname` in                               \
-	*Darwin*)                                      \
-		case `uname -m` in                     \
-		*arm64*)                               \
-			echo "#define Deftgt T_arm64_apple";\
-			;;                             \
-		*)                                     \
-			echo "#define Deftgt T_amd64_apple";\
-			;;                             \
-		esac                                   \
-		;;                                     \
-	*)                                             \
-		case `uname -m` in                     \
-		*aarch64*|*arm64*)                     \
-			echo "#define Deftgt T_arm64"; \
-			;;                             \
-		*riscv64*)                             \
-			echo "#define Deftgt T_rv64";  \
-			;;                             \
-		*)                                     \
-			echo "#define Deftgt T_amd64_sysv";\
-			;;                             \
-		esac                                   \
-		;;                                     \
-	esac > $@
-
+	@touch $@
 
 ${PREFIX}/lambda-larry/prefix/bin/%: pkg/qbe/%
 	install -Dm 0755 $< $@
