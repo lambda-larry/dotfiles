@@ -1,3 +1,6 @@
+ifndef PKG_COMMON
+PKG_COMMON := 1
+
 ${PREFIX}/lambda-larry/prefix/%: PREFIX := ${PREFIX}/lambda-larry/prefix
 
 %.o: CPPFLAGS += -imacros autoconf/config.h
@@ -12,3 +15,4 @@ ${PREFIX}/lambda-larry/prefix/%: PREFIX := ${PREFIX}/lambda-larry/prefix
 
 %.xml: %.txt
 	asciidoc -b docbook -d manpage -o $@ $<
+endif
