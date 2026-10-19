@@ -1,8 +1,5 @@
 /* See LICENSE file for license details. */
 #define _XOPEN_SOURCE 500
-#if HAVE_SHADOW_H
-#include <shadow.h>
-#endif
 
 #include <ctype.h>
 #include <errno.h>
@@ -79,28 +76,6 @@ gethash(void)
 			die("slock: cannot retrieve password entry\n");
 	}
 	hash = pw->pw_passwd;
-
-#if HAVE_SHADOW_H
-	if (!strcmp(hash, "x")) {
-		struct spwd *sp;
-		if (!(sp = getspnam(pw->pw_name)))
-			die("slock: getspnam: cannot retrieve shadow entry. "
-			    "Make sure to suid or sgid slock.\n");
-		hash = sp->sp_pwdp;
-	}
-#else
-	if (!strcmp(hash, "*")) {
-#ifdef __OpenBSD__
-		if (!(pw = getpwuid_shadow(getuid())))
-			die("slock: getpwnam_shadow: cannot retrieve shadow entry. "
-			    "Make sure to suid or sgid slock.\n");
-		hash = pw->pw_passwd;
-#else
-		die("slock: getpwuid: cannot retrieve shadow entry. "
-		    "Make sure to suid or sgid slock.\n");
-#endif /* __OpenBSD__ */
-	}
-#endif /* HAVE_SHADOW_H */
 
 	return hash;
 }
@@ -291,10 +266,6 @@ int
 main(int argc, char **argv) {
 	struct xrandr rr;
 	struct lock **locks;
-	struct passwd *pwd;
-	struct group *grp;
-	uid_t duid;
-	gid_t dgid;
 	const char *hash;
 	Display *dpy;
 	int s, nlocks, nscreens;
@@ -307,33 +278,11 @@ main(int argc, char **argv) {
 		usage();
 	} ARGEND
 
-	/* validate drop-user and -group */
-	errno = 0;
-	if (!(pwd = getpwnam(user)))
-		die("slock: getpwnam %s: %s\n", user,
-		    errno ? strerror(errno) : "user entry not found");
-	duid = pwd->pw_uid;
-	errno = 0;
-	if (!(grp = getgrnam(group)))
-		die("slock: getgrnam %s: %s\n", group,
-		    errno ? strerror(errno) : "group entry not found");
-	dgid = grp->gr_gid;
-
 	hash = gethash();
 	errno = 0;
-	if (!crypt("", hash))
-		die("slock: crypt: %s\n", strerror(errno));
 
 	if (!(dpy = XOpenDisplay(NULL)))
 		die("slock: cannot open display\n");
-
-	/* drop privileges */
-	if (setgroups(0, NULL) < 0)
-		die("slock: setgroups: %s\n", strerror(errno));
-	if (setgid(dgid) < 0)
-		die("slock: setgid: %s\n", strerror(errno));
-	if (setuid(duid) < 0)
-		die("slock: setuid: %s\n", strerror(errno));
 
 	/* check for Xrandr support */
 	rr.active = XRRQueryExtension(dpy, &rr.evbase, &rr.errbase);
