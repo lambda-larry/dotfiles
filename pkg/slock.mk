@@ -31,6 +31,7 @@ pkg/slock/slock: LDFLAGS += $(shell pkg-config --libs pam)
 
 
 -include $(wildcard pkg/slock/*.d)
+pkg/slock/slock: pkg/slock/slock.o
 
 ${PREFIX}/lambda-larry/prefix/bin/%: pkg/slock/%
 	install -Dm 0755 $< $@
