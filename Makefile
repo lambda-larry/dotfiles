@@ -34,5 +34,6 @@ ${PREFIX}/%/picom.conf: files/%/picom.conf
 # We don't use symlink, just _duplicate_ code
 ${PREFIX}/.local/bin/git-init-%: MODE := 0755
 ${PREFIX}/.local/bin/git-init-%: files/.config/git/bin/git-init-template
+	install -Dm ${MODE} $< $@
 
 deploy: ${PREFIX}/.local/bin/git-init-c
