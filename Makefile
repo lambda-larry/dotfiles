@@ -5,7 +5,7 @@ PREFIX ?= ${HOME}
 
 -include hosts/${HOST}.mk
 -include hosts/${USER}.mk
--include hosts/${HOST}-${USER}.mk
+-include hosts/${USER}@${HOST}.mk
 
 deploy:
 
