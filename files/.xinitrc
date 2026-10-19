@@ -19,7 +19,7 @@ LAUNCHERS+=(dbus-run-session)
 setxkbmap -option grp:alt_shift_toggle -layout us
 xrdb ~/.config/X11/Xresources
 
-exec "${LAUNCHERS[@]}" bash <(cat << BASH
+cat << BASH | exec "${LAUNCHERS[@]}" bash
 spawn() {
 	\$@ 2>/dev/null & disown
 }
@@ -32,4 +32,3 @@ spawn flameshot
 
 exec $WM
 BASH
-)
