@@ -49,7 +49,7 @@ pkg/qbe/qbe:
 pkg/qbe/config.h:
 	@touch $@
 
-pkg/qbe/%.o: pkg/qbe/config.h
+pkg/qbe/main.o: pkg/qbe/config.h
 
 ${PREFIX}/lambda-larry/prefix/bin/%: pkg/qbe/%
 	install -Dm 0755 $< $@
