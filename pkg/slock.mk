@@ -27,6 +27,7 @@ pkg/slock/%.o: CPPFLAGS += -DVERSION='"$(VERSION)"'
 
 pkg/slock/slock: LDFLAGS += $(shell pkg-config --libs x11 xext xrandr)
 pkg/slock/slock: LDFLAGS += $(shell pkg-config --libs libcrypt)
+pkg/slock/slock: LDFLAGS += $(shell pkg-config --libs pam)
 
 
 -include $(wildcard pkg/slock/*.d)
