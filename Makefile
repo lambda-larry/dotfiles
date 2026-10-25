@@ -19,14 +19,16 @@ deploy:
 	find files/ -type f -fprintf $@  '$${PREFIX}/%P:%#m\n'
 
 .index.d: .tab.d
-	awk -F : '{ printf("deploy: %s\n", $$1) }' $< > $@
+	awk -F : '{ printf("deploy: %s\n", $$1) }' $< | sed 's|\.shtp$$||' > $@
 
 .mode.d: .tab.d
-	awk -F : '{ printf("%s: MODE := %s\n", $$1, $$2) }' $< > $@
+	awk -F : '{ printf("%s: MODE := %s\n", $$1, $$2) }' $< | sed 's|\.shtp: |: |' > $@
 
 .os-release.d: /etc/os-release
 	@tools/bash2make -v prefix=OS_ < $< > $@
 
+${PREFIX}/%: files/%.shtp
+	install -Dm ${MODE} <(bash $<) $@
 
 ${PREFIX}/%: files/%
 	install -Dm ${MODE} $< $@
