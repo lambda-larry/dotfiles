@@ -15,10 +15,14 @@ deploy:
 
 -include os/${OS_ID}.mk
 
-.index.d .mode.d: Makefile $(shell find files/ -type d)
-	@find files/ -type f \
-		-fprintf .index.d 'deploy: $${PREFIX}/%P\n' \
-		-fprintf .mode.d  '$${PREFIX}/%P: MODE := %#m\n'
+.tab.d: Makefile $(shell find files/ -type d)
+	find files/ -type f -fprintf $@  '$${PREFIX}/%P:%#m\n'
+
+.index.d: .tab.d
+	awk -F : '{ printf("deploy: %s\n", $$1) }' $< > $@
+
+.mode.d: .tab.d
+	awk -F : '{ printf("%s: MODE := %s\n", $$1, $$2) }' $< > $@
 
 .os-release.d: /etc/os-release
 	@tools/bash2make -v prefix=OS_ < $< > $@
