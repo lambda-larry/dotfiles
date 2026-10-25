@@ -1,6 +1,9 @@
 HOST   ?= $(shell uname -n)
 PREFIX ?= ${HOME}
 
+include config.def.mk
+-include config.mk
+
 -include local.mk
 
 -include hosts/${HOST}.mk
