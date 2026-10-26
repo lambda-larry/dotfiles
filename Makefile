@@ -30,7 +30,7 @@ deploy:
 .os-release.d: /etc/os-release
 	@tools/bash2make -v prefix=OS_ < $< > $@
 
-${PREFIX}/%: files/%.shtp
+${PREFIX}/%: files/%.shtp | $(wildcard config.def.mk config.mk)
 	install -Dm ${MODE} <(bash $<) $@
 
 ${PREFIX}/%: files/%
