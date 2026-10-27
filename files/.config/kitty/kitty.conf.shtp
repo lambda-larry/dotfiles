@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+cat << "KITTY"
 # vim:fileencoding=utf-8:foldmethod=marker
 
 #: Fonts {{{
@@ -19,9 +21,14 @@ bold_italic_font auto
 #: fonts manually, read the font specification syntax
 #: <https://sw.kovidgoyal.net/kitty/kittens/choose-fonts/#font-spec-
 #: syntax>.
+KITTY
 
-# font_size 10.0
+cat << KITTY
 
+font_size $(echo -n "${TERMINAL_FONT_SIZE:-10.0}")
+KITTY
+
+cat << "KITTY"
 #: Font size (in pts).
 
 # force_ltr no
@@ -2932,3 +2939,4 @@ background_opacity 0.5
 background_blur 64
 
 include colorscheme.conf
+KITTY
