@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+cat << BASH
+$(echo TZ=$TZ)
+BASH
