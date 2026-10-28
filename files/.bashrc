@@ -59,8 +59,8 @@ export LESSHISTFILE=/dev/null
 load "$XDG_CONFIG_HOME/nnn/config"
 # }}}
 # {{{ PATH
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/lambda-larry/prefix/bin:$PATH"
+[[ $PATH =~ (^|:)$HOME/.local/bin(:|$) ]]              || export PATH="$HOME/.local/bin:$PATH"
+[[ $PATH =~ (^|:)$HOME/lambda-larry/prefix/bin(:|$) ]] || export PATH="$HOME/lambda-larry/prefix/bin:$PATH"
 # }}}
 # {{{ alias
 alias vim=nvim
