@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 cat << BASH
-$(echo TZ=$TZ)
+$(echo export TZ=$TZ)
 BASH
