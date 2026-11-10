@@ -1,6 +1,8 @@
 main.o: CPPFLAGS += -I./subprojects/raylib/src
+main.o: CPPFLAGS += -I./subprojects/raygui/src
 
 src/%.o: CPPFLAGS += -I./subprojects/raylib/src
+src/%.o: CPPFLAGS += -I./subprojects/raygui/src
 
 src/plug.so: src/plug.o
 

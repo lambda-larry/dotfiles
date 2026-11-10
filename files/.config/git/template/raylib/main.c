@@ -4,6 +4,7 @@
 #include <time.h>
 
 #include <raylib.h>
+#include <raygui.h>
 
 #include <dlfcn.h>
 #include <sys/stat.h>
