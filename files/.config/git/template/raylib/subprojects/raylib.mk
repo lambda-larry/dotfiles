@@ -12,5 +12,3 @@ RL_OBJ += ./subprojects/raylib/src/rtextures.o
 RL_OBJ += ./subprojects/raylib/src/rshapes.o
 RL_OBJ += ./subprojects/raylib/src/rmodels.o
 RL_OBJ += ./subprojects/raylib/src/raudio.o
-
-OBJ += $(RL_OBJ)
