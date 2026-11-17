@@ -128,6 +128,11 @@ if [ "$(type -t __git_complete)" = function ]; then
 	unset git_alias_complete
 fi
 # }}}
+# {{{ mail
+function neomutt() {
+	TERM=xterm-direct command neomutt "$@"
+}
+# }}}
 # {{{ telemetry
 if [[ -x dotnet ]]; then
 	export DOTNET_CLI_TELEMETRY_OPTOUT=1
