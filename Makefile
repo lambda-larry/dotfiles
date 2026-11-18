@@ -1,3 +1,5 @@
+SHELL := $(shell which bash)
+
 HOST   ?= $(shell uname -n)
 PREFIX ?= ${HOME}
 
@@ -46,3 +48,6 @@ ${PREFIX}/.local/bin/git-init-%: files/.config/git/bin/git-init-template
 	install -Dm ${MODE} $< $@
 
 deploy: ${PREFIX}/.local/bin/git-init-c
+
+shell:
+	@exec ${SHELL}
