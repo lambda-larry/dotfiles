@@ -3,6 +3,8 @@ SHELL := $(shell which bash)
 HOST   ?= $(shell uname -n)
 PREFIX ?= ${HOME}
 
+include lib/pass.mk
+
 include config.def.mk
 -include config.mk
 
