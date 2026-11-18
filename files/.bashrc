@@ -61,6 +61,7 @@ load "$XDG_CONFIG_HOME/nnn/config"
 # {{{ PATH
 [[ $PATH =~ (^|:)$HOME/.local/bin(:|$) ]]              || export PATH="$HOME/.local/bin:$PATH"
 [[ $PATH =~ (^|:)$HOME/lambda-larry/prefix/bin(:|$) ]] || export PATH="$HOME/lambda-larry/prefix/bin:$PATH"
+[[ $PATH =~ (^|:)$HOME/lambda-larry/prefix-nvim/bin(:|$) ]] || export PATH="$HOME/lambda-larry/prefix-nvim/bin:$PATH"
 # }}}
 # {{{ alias
 alias vim=nvim
