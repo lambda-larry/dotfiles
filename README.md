@@ -18,7 +18,7 @@ make PREFIX=/mnt/gentoo/home/${USER}
 ## TODO
 
 - [ ] Secret management
-- [ ] Template
+- [x] Template
 - [ ] Diff tool
 - [ ] Autoconf feature detection script (autoconf/config.h)
 
