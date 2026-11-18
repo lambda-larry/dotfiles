@@ -19,13 +19,13 @@ deploy:
 -include os/${OS_ID}.mk
 
 .tab.d: Makefile $(shell find files/ -type d)
-	find files/ -type f -fprintf $@  '$${PREFIX}/%P:%#m\n'
+	@find files/ -type f -fprintf $@  '$${PREFIX}/%P:%#m\n'
 
 .index.d: .tab.d
-	awk -F : '{ printf("deploy: %s\n", $$1) }' $< | sed 's|\.shtp$$||' > $@
+	@awk -F : '{ printf("deploy: %s\n", $$1) }' $< | sed 's|\.shtp$$||' > $@
 
 .mode.d: .tab.d
-	awk -F : '{ printf("%s: MODE := %s\n", $$1, $$2) }' $< | sed 's|\.shtp: |: |' > $@
+	@awk -F : '{ printf("%s: MODE := %s\n", $$1, $$2) }' $< | sed 's|\.shtp: |: |' > $@
 
 .os-release.d: /etc/os-release
 	@tools/bash2make -v prefix=OS_ < $< > $@
