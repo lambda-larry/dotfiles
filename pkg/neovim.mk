@@ -9,4 +9,5 @@ deploy-nvim:
 	$(MAKE) -C pkg/neovim install CMAKE_INSTALL_PREFIX=${PREFIX}/lambda-larry/prefix-nvim
 
 clean-nvim:
-	$(MAKE) -C pkg/neovim clean
+	$(RM) -r pkg/neovim/build
+	$(RM) -r pkg/neovim/.deps
