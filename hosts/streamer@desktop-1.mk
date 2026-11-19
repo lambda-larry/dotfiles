@@ -5,3 +5,5 @@ include pkg/slock.mk
 
 include pkg/qbe.mk
 include pkg/nasm.mk
+
+include pkg/neovim.mk
